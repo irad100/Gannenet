@@ -9,8 +9,11 @@ Instruction found here- https://people.csail.mit.edu/hubert/pyaudio/#downloads
 
 # Setup
 `git clone https://github.com/irad100/get-back-to-work.git`
+
 `cd get-back-to-work`
+
 `python3 record.py face_irad.jpg just-do-it.wav 1`
+
 # Credits
 This project was created thanks to these amazing projects
 
