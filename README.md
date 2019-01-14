@@ -1,6 +1,8 @@
 # Get Back To Work!
 Face Recognition software to keep you focused on work- Playing an audio file if you don't look at your computer for x number of frames.
+
 ![](get-back-to-work.gif)
+
 # Dependencies
 ## Install face_recognition:
 Instruction found here- https://github.com/ageitgey/face_recognition#installation
