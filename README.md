@@ -1,5 +1,5 @@
 # Get Back To Work!
-Face Recognition software to keep you focused on work
+Face Recognition software to keep you focused on work- Playing an audio file if you don't look at your computer for x number of frames.
 # Dependencies
 ## Install face_recognition:
 Instruction found here- https://github.com/ageitgey/face_recognition#installation
@@ -12,8 +12,11 @@ Instruction found here- https://people.csail.mit.edu/hubert/pyaudio/#downloads
 
 `cd get-back-to-work`
 
-`python3 record.py face_irad.jpg just-do-it.wav 1`
+Copy a picture of your face to this folder
 
+# Run
+`python3 record.py <FACE_FILE> just-do-it.wav 1`
+`#Parameters-     (your image) (audio file) (frames to wait till audio)
 # Credits
 This project was created thanks to these amazing projects
 
