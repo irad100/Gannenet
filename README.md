@@ -16,7 +16,8 @@ Copy a picture of your face to this folder
 
 # Run
 `python3 record.py <FACE_FILE> just-do-it.wav 1`
-`#Parameters-     (your image) (audio file) (frames to wait till audio)
+
+`#Parameters-     (your image) (audio file) (frames to wait till audio)`
 # Credits
 This project was created thanks to these amazing projects
 
