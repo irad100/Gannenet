@@ -18,6 +18,7 @@ Instruction found here- https://people.csail.mit.edu/hubert/pyaudio/#downloads
 This project was created thanks to these amazing projects
 
 face_recognition by Adam Geitgey (ageitgey): https://github.com/ageitgey/face_recognition
+
 (I used alot of the code from here- https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
 
 PyAudio by Hubert Pham: https://people.csail.mit.edu/hubert/pyaudio/
