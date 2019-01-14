@@ -1,5 +1,12 @@
 # Get Back To Work!
 Face Recognition software to keep you focused on work
+# Dependencies
+## Install face_recognition:
+Instruction found here- https://github.com/ageitgey/face_recognition#installation
+
+## Install PyAudio:
+Instruction found here- https://people.csail.mit.edu/hubert/pyaudio/#downloads
+
 # Setup
 `git clone https://github.com/irad100/get-back-to-work.git`
 `cd get-back-to-work`
