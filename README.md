@@ -1,4 +1,4 @@
-# Get Back To Work!
+# Gannenet
 Face Recognition to keep you focused on work- Playing an audio file if you don't look at your computer for a while.
 
 ![](get-back-to-work.gif)

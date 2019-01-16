@@ -11,7 +11,7 @@ from time import sleep, time
 from datetime import datetime, timedelta
 from subprocess import check_output, call
 
-image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 5, ["Microsoft Word"]
+image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
 
 def run(image_path, audio_path, wait_sec, apps):
     # Get a reference to webcam #0 (the default one)
