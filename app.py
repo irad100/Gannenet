@@ -64,7 +64,7 @@ app.layout = html.Div([
 def update_metrics(n):
     if not g.isAlive():
         g.start()
-        print("Starting Main Thread")
+        print("Main Thread Started")
     elapsed_str = g.to_string()
     style = {'padding': '5px', 'fontSize': '16px'}
     return [
@@ -98,7 +98,7 @@ def update_graph_live(n):
     
     fig = ff.create_gantt(df, colors=colors, index_col='Resource', title='',
                       show_colorbar=True, bar_width=0.1, showgrid_x=False, showgrid_y=False, group_tasks=True)
-    #print(fig['layout'])
+
     fig['layout']['height'] = 450
     
 
@@ -153,9 +153,9 @@ if __name__ == "__main__":
         wait_sec = int(wait_sec)
         apps = sys.argv[4:]
         if wait_sec <= 0:
-            #print("Wait seconds must be bigger than 0")
+            print("Wait seconds must be bigger than 0")
             sys.exit(1)
     else:
-        image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
+        image_path, audio_path, wait_sec, apps = "faces/face_irad.jpg", "audio/alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
     g = Gannenet(image_path, audio_path, wait_sec, apps)
     app.run_server(debug=True)

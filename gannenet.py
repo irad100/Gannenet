@@ -38,14 +38,16 @@ class Gannenet(Thread):
     playing = False
     player = None
     image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
-
-    def __init__(self, image_path="face_irad.jpg", audio_path="alarm.wav", wait_sec=10, apps=["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]):
+    is_gui = True
+    def __init__(self, image_path="face_irad.jpg", audio_path="alarm.wav", wait_sec=10, apps=["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
         super(Gannenet, self).__init__()
+        self.is_gui = is_gui
         self.image_path, self.audio_path, self.wait_sec, self.apps = image_path, audio_path, wait_sec, apps
-        #print("--- Welcome to Get Back To Work! ---")
-        #print("---  Seriously, Get Back to Work ---")
-        #print("---     Press Ctrl+C to quit     ---")
-        #print(f"--- Parameters: [Image Path: {self.image_path}, Audio Path: {self.audio_path}, Wait seconds: {self.wait_sec}, self.apps: {self.apps}] ---\n")
+        if not self.is_gui:
+            print("--- Welcome to Get Back To Work! ---")
+            print("---  Seriously, Get Back to Work ---")
+            print("---     Press Ctrl+C to quit     ---")
+            print(f"--- Parameters: [Image Path: {self.image_path}, Audio Path: {self.audio_path}, Wait seconds: {self.wait_sec}, self.apps: {self.apps}] ---\n")
         # Get a reference to webcam #0 (the default one)
         self.video_capture = VideoCapture(0)
 
@@ -103,12 +105,13 @@ class Gannenet(Thread):
                 if not self.is_working:
                     self.start_working = datetime.now()
                     self.is_working = True
-                    time_str = self.start_working.strftime("%d/%m/%y, %H:%M:%S")
-                    #print("\n\n\n--- Started the working session  ---\n")
-                    #if sys.platform == 'darwin' and self.apps:
-                        #print(f"Working!     :), Active app: {active_app} - Time: {time_str}\n")
-                    #else:
-                        #print(f"Working!     :) - Time: {time_str}\n")
+                    if not self.is_gui:
+                        time_str = self.start_working.strftime("%d/%m/%y, %H:%M:%S")
+                        print("\n\n\n--- Started the working session  ---\n")
+                        if sys.platform == 'darwin' and self.apps:
+                            print(f"Working!     :), Active app: {active_app} - Time: {time_str}\n")
+                        else:
+                            print(f"Working!     :) - Time: {time_str}\n")
                     if self.audio_path != "skip" and self.playing:
                         self.playing = False
                         self.player.stop()
@@ -122,19 +125,19 @@ class Gannenet(Thread):
                     self.end_working = datetime.now()
                     self.reset_working = self.end_working
                     self.is_working = False
-                    time_str = self.end_working.strftime("%d/%m/%y, %H:%M:%S")
-
-                    #if sys.platform == 'darwin' and self.apps:
-                        #print(f"\n\nNot Working! :(, Active app: {active_app}  - Time: {time_str}\n")
-                    #else:
-                        #print(f"\n\nNot Working! :( - Time: {time_str}\n")
-                        #print("--- Finished the working session ---\n\n")
+                    if not self.is_gui:
+                        time_str = self.end_working.strftime("%d/%m/%y, %H:%M:%S")
+                        if sys.platform == 'darwin' and self.apps:
+                            print(f"\n\nNot Working! :(, Active app: {active_app}  - Time: {time_str}\n")
+                        else:
+                            print(f"\n\nNot Working! :( - Time: {time_str}\n")
+                            print("--- Finished the working session ---\n\n")
                     if self.audio_path != "skip":
                         self.playing = True
                         self.player = audio.Player(self.audio_path)
                         self.player.play()
-            
-            #print(self.to_string(), end="\r")
+            if not self.is_gui:
+                print(self.to_string(), end="\r")
 
     def __str_time_delta(self, time_delta, fmt):
         d = {}
@@ -174,6 +177,7 @@ class Gannenet(Thread):
         self.exit = True
 
 
+
 def __signal_handler(sig, frame):
         print("\n\n\n---     You pressed Ctrl+C!      ---")
         print("---   Have a Nice Day! Goodbye   ---")
@@ -188,9 +192,10 @@ if __name__ == "__main__":
         wait_sec = int(wait_sec)
         apps = sys.argv[4:]
         if wait_sec <= 0:
-            #print("Wait seconds must be bigger than 0")
+            print("Wait seconds must be bigger than 0")
             sys.exit(1)
     else:
-        image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
-    g = Gannenet(image_path, audio_path, wait_sec, apps)
+        image_path, audio_path, wait_sec, apps = "faces/face_irad.jpg", "audio/alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
+    is_gui = False
+    g = Gannenet(image_path, audio_path, wait_sec, apps, is_gui)
     g.start()
