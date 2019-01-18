@@ -18,14 +18,14 @@ Instructions found here- https://dash.plot.ly/installation + https://plot.ly/pyt
 
 `cd gannenet`
 
-Copy a picture of your face to this folder
+Copy a picture of your face to the faces folder
 
 # Run
 Parameters- image file path, audio file path, seconds to wait for status change
 
 e.g:
 
-`python3 app.py <FACE_FILE> alarm.wav 10`
+`python3 app.py faces/<FACE_FILE> audio/alarm.wav 10`
 
 ### Whitelist apps
 Available only for macOS.
@@ -36,7 +36,7 @@ Parameters- image file path, audio file path, seconds to wait for status change,
 
 e.g:
 
-`python3 app.py <FACE_FILE> alarm.wav 10 "Microsoft Word" "Spotify" "AdobeAcrobat" "Finder"`
+`python3 app.py faces/<FACE_FILE> audio/alarm.wav 10 "Microsoft Word" "Spotify" "AdobeAcrobat" "Finder"`
 
 # Credits
 This project was created thanks to these amazing projects:
