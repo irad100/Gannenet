@@ -22,13 +22,20 @@ Copy a picture of your face to this folder
 
 # Run
 Parameters- image file path, audio file path, seconds to wait for status change
+
 e.g:
+
 `python3 app.py <FACE_FILE> alarm.wav 10
+
 ## Whitelist apps
 Available only for macOS.
+
 After all the other parametes, add Apps you allow yourself to use while working.
+
 Parameters- image file path, audio file path, seconds to wait for status change, whitelist apps
+
 e.g:
+
 `python3 app.py <FACE_FILE> alarm.wav 10 "Microsoft Word" "Spotify" "AdobeAcrobat" "Finder"`
 
 # Credits
