@@ -25,9 +25,9 @@ Parameters- image file path, audio file path, seconds to wait for status change
 
 e.g:
 
-`python3 app.py <FACE_FILE> alarm.wav 10
+`python3 app.py <FACE_FILE> alarm.wav 10`
 
-## Whitelist apps
+### Whitelist apps
 Available only for macOS.
 
 After all the other parametes, add Apps you allow yourself to use while working.
