@@ -1,0 +1,7 @@
+face_recognition
+pyaudio
+dash
+dash-html-components
+dash-core-components
+dash-table
+plotly
