@@ -24,7 +24,7 @@ Instructions found here- https://dash.plot.ly/installation + https://plot.ly/pyt
 
 `cd gannenet`
 
-Copy a picture of your face to the faces folder
+Copy a picture of your face to the images folder
 
 ## Run
 
@@ -32,7 +32,7 @@ Parameters- image file path, audio file path, seconds to wait for status change
 
 e.g:
 
-`python3 app.py faces/<FACE_FILE> audio/alarm.wav 10`
+`python3 app.py images/<FACE_FILE> audio/alarm.wav 10`
 
 ### Whitelist apps
 
@@ -44,7 +44,7 @@ Parameters- image file path, audio file path, seconds to wait for status change,
 
 e.g:
 
-`python3 app.py faces/<FACE_FILE> audio/alarm.wav 10 "Microsoft Word" "Spotify" "AdobeAcrobat" "Finder"`
+`python3 app.py images/<FACE_FILE> audio/alarm.wav 10 "Microsoft Word" "Spotify" "AdobeAcrobat" "Finder"`
 
 Note: To find out what is the appropriate name for each app you can run:
 
