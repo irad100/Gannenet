@@ -40,7 +40,7 @@ class Gannenet(Thread):
     image_path, audio_path, wait_sec, apps = "", "", 0, []
     is_gui = True
 
-    def __init__(self, image_path="images/face_irad.jpg", audio_path="audio/alarm.wav", wait_sec=10, apps=["Microsoft Word", "Microsoft Excel" "iTerm2", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
+    def __init__(self, image_path="images/face_irad.jpg", audio_path="audio/alarm.wav", wait_sec=10, apps=["Microsoft Word", "Microsoft Excel", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
         super(Gannenet, self).__init__()
         self.is_gui = is_gui
         self.image_path, self.audio_path, self.wait_sec, self.apps = image_path, audio_path, wait_sec, apps
