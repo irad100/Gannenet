@@ -2,6 +2,7 @@ from threading import Thread
 from wave import open as wave_open
 from pyaudio import PyAudio
 
+
 class Player(Thread):
     audio_path = ""
     chunk = 0
@@ -49,4 +50,3 @@ class Player(Thread):
         Stop playback.
         """
         self.loop = False
-
