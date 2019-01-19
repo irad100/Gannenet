@@ -37,9 +37,9 @@ class Gannenet(Thread):
     process_this_frame = True
     playing = False
     player = None
-    image_path, audio_path, wait_sec, apps = "face_irad.jpg", "alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
+    image_path, audio_path, wait_sec, apps = "", "", 0, []
     is_gui = True
-    def __init__(self, image_path="face_irad.jpg", audio_path="alarm.wav", wait_sec=10, apps=["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
+    def __init__(self, image_path="images/face_irad.jpg", audio_path="audio/alarm.wav", wait_sec=10, apps=["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
         super(Gannenet, self).__init__()
         self.is_gui = is_gui
         self.image_path, self.audio_path, self.wait_sec, self.apps = image_path, audio_path, wait_sec, apps
@@ -146,7 +146,7 @@ class Gannenet(Thread):
         return fmt.format(**d)
 
     def get_active_app(self):
-        active_app = check_output(["osascript", "frontmost_app.applescript"]).decode().strip()
+        active_app = check_output(["osascript", "scripts/active_app.applescript"]).decode().strip()
         return active_app
 
 
@@ -194,8 +194,7 @@ if __name__ == "__main__":
         if wait_sec <= 0:
             print("Wait seconds must be bigger than 0")
             sys.exit(1)
+        g = Gannenet(image_path=image_path, audio_path=audio_path, wait_sec=wait_sec, apps=apps, is_gui=False)
     else:
-        image_path, audio_path, wait_sec, apps = "faces/face_irad.jpg", "audio/alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
-    is_gui = False
-    g = Gannenet(image_path, audio_path, wait_sec, apps, is_gui)
+        g = Gannenet(is_gui=False)
     g.start()

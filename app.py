@@ -15,7 +15,6 @@ from subprocess import check_output, call
 from signal import signal, SIGINT
 
 
-
 df = []
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
@@ -155,7 +154,7 @@ if __name__ == "__main__":
         if wait_sec <= 0:
             print("Wait seconds must be bigger than 0")
             sys.exit(1)
+        g = Gannenet(image_path=image_path, audio_path=audio_path, wait_sec=wait_sec, apps=apps)
     else:
-        image_path, audio_path, wait_sec, apps = "faces/face_irad.jpg", "audio/alarm.wav", 10, ["Microsoft Word", "iTerm2", "Spotify", "AdobeAcrobat", "Finder"]
-    g = Gannenet(image_path, audio_path, wait_sec, apps)
+        g = Gannenet()
     app.run_server(debug=True)
