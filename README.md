@@ -18,6 +18,12 @@ Instructions found here- https://people.csail.mit.edu/hubert/pyaudio/#downloads
 
 Instructions found here- https://dash.plot.ly/installation + https://plot.ly/python/getting-started/#installation
 
+### To Install all automatically
+
+After installing PortAudio and dlib for your system run:
+
+`pip install -r requirements.txt`
+
 ## Setup
 
 `git clone https://github.com/irad100/gannenet.git`
