@@ -16,7 +16,7 @@ from signal import signal, SIGINT
 
 
 df = []
-
+thread_started = False
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
                 "https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i",
                 "https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i"]
@@ -61,7 +61,10 @@ app.layout = html.Div([
 @app.callback(Output('live-update-text', 'children'),
               [Input('interval-component', 'n_intervals')])
 def update_metrics(n):
-    if not g.isAlive():
+    global thread_started
+    global g
+    if not g.isAlive() and not thread_started:
+        thread_started = True
         g.start()
         print("Main Thread Started")
     elapsed_str = g.to_string()
