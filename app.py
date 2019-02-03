@@ -12,8 +12,8 @@ from dash.dependencies import Input, Output
 from gannenet import Gannenet
 import sys
 from subprocess import check_output, call
-from signal import signal, SIGINT
-
+import atexit
+import argparse
 
 df = []
 thread_started = False
@@ -35,27 +35,6 @@ app.layout = html.Div([
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'})
-
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-# app = dash.Dash('working-status-app', external_stylesheets=external_stylesheets)
-# style = {'padding': '5px', 'fontSize': '16px'}
-# app.layout = html.Div(
-#     html.Div([
-#         html.H4('Gannenet: Live Working Status'),
-#         html.Div([
-#         html.Span('--- Welcome to Get Back To Work! ---'),
-#         html.Span('---  Seriously, Get Back to Work ---'),
-#         html.Span(f'--- Parameters: [Image Path: {g.image_path}, Audio Path: {g.audio_path}, Wait seconds: {g.wait_sec}, self.apps: {g.apps}] ---'),]),
-#         html.Div(id='live-update-text'),
-#         dcc.Graph(id='live-update-graph'),
-#         dcc.Interval(
-#             id='interval-component',
-#             interval=1*1000, # in milliseconds
-#             n_intervals=0
-#         )
-#     ])
-# )
 
 
 @app.callback(Output('live-update-text', 'children'),
@@ -141,7 +120,7 @@ def update_graph_live(n):
     return fig
 
 
-def __signal_handler(sig, frame):
+def __exit_handler(g):
     print("\n\n\n---     You pressed Ctrl+C!      ---")
     print("---   Have a Nice Day! Goodbye   ---")
 
@@ -149,20 +128,8 @@ def __signal_handler(sig, frame):
     #plty.plot(fig, filename='daily-schedule', fileopt='extend')
 
     g.stop()
-    sys.exit(0)
-
 
 if __name__ == "__main__":
-    signal(SIGINT, __signal_handler)
-    if len(sys.argv) >= 4:
-        image_path, audio_path, wait_sec = sys.argv[1:4]
-        wait_sec = int(wait_sec)
-        apps = sys.argv[4:]
-        if wait_sec <= 0:
-            print("Wait seconds must be bigger than 0")
-            sys.exit(1)
-        g = Gannenet(image_path=image_path, audio_path=audio_path,
-                     wait_sec=wait_sec, apps=apps)
-    else:
-        g = Gannenet()
+    g = Gannenet()
+    atexit.register(__exit_handler, g)
     app.run_server(debug=True)

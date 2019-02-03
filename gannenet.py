@@ -7,11 +7,11 @@ import audio
 from threading import Thread
 
 import sys
-from signal import signal, SIGINT
+import atexit
 from time import sleep, time
 from datetime import datetime, timedelta
 from subprocess import check_output, call
-
+import argparse
 
 class Gannenet(Thread):
     exit = False
@@ -40,8 +40,20 @@ class Gannenet(Thread):
     image_path, audio_path, wait_sec, apps = "", "", 0, []
     is_gui = True
 
-    def __init__(self, image_path="images/face_irad.jpg", audio_path="audio/alarm.wav", wait_sec=10, apps=["Microsoft Word", "Microsoft Excel", "Spotify", "AdobeAcrobat", "Finder"], is_gui=True):
+    def __init__(self, is_gui=True):
         super(Gannenet, self).__init__()
+
+        parser = argparse.ArgumentParser(description='Process some integers.')
+        parser.add_argument('--image_path', nargs='?', default='images/face_irad.jpg', help='path to an image of your face')
+        parser.add_argument('--audio_path', nargs='?', default='audio/alarm.wav', help='path to a wav file to play when not working, skip for no audio')
+        parser.add_argument('--wait_sec', nargs='?', type=int, default=10, help='seconds to wait until notifying the user')
+        parser.add_argument('--apps', nargs='*', default=["Microsoft Word", "Microsoft Excel", "Spotify", "AdobeAcrobat", "Finder"], help='whitelist apps')
+        args = parser.parse_args()
+        image_path = args.image_path
+        audio_path = args.audio_path
+        wait_sec = args.wait_sec
+        apps = args.apps
+
         self.is_gui = is_gui
         self.image_path, self.audio_path, self.wait_sec, self.apps = image_path, audio_path, wait_sec, apps
         if not self.is_gui:
@@ -186,25 +198,13 @@ class Gannenet(Thread):
         self.exit = True
 
 
-def __signal_handler(sig, frame):
+def __exit_handler(g):
     print("\n\n\n---     You pressed Ctrl+C!      ---")
     print("---   Have a Nice Day! Goodbye   ---")
-    g.exit()
-    sys.exit(0)
-
+    g.stop()
 
 if __name__ == "__main__":
     call(["clear"], shell=True)
-    signal(SIGINT, __signal_handler)
-    if len(sys.argv) >= 4:
-        image_path, audio_path, wait_sec = sys.argv[1:4]
-        wait_sec = int(wait_sec)
-        apps = sys.argv[4:]
-        if wait_sec <= 0:
-            print("Wait seconds must be bigger than 0")
-            sys.exit(1)
-        g = Gannenet(image_path=image_path, audio_path=audio_path,
-                     wait_sec=wait_sec, apps=apps, is_gui=False)
-    else:
-        g = Gannenet(is_gui=False)
+    g = Gannenet(is_gui=False)
+    atexit.register(__exit_handler, g)
     g.start()
